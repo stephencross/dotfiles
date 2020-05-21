@@ -231,6 +231,8 @@ root.buttons(gears.table.join(
 globalkeys = gears.table.join(
     awful.key({ modkey,           }, "b", function () awful.spawn("firefox") end,
               {description = "Firefox", group = "My Apps"}),
+    awful.key({ modkey,           }, "v", function () awful.spawn(terminal.." vifm") end,
+              {description = "Vim File Mananger", group = "My Apps"}),
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
