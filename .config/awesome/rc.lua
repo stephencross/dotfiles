@@ -49,7 +49,7 @@ beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"
-editor = os.getenv("EDITOR") or "nano"
+editor = os.getenv("EDITOR") or "nvim"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -574,3 +574,5 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 --
 -- NetworkManager
 awful.util.spawn("nm-applet")
+-- Battery Indicator
+awful.util.spawn("cbatticon")

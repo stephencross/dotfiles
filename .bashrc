@@ -10,6 +10,9 @@ PS1='[\u@\h \W]\$ '
 
 alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 
+# vim
+alias vim='nvim'
+
 # some more ls aliases
 alias ll='ls -alF'
 alias la='ls -A'
