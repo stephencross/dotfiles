@@ -20,3 +20,6 @@ let g:limelight_conceal_ctermfg = 100
 
 " Color name (:help gui-colors) or RGB color
 let g:limelight_conceal_guifg = '#83a598'
+
+" Wrap
+command! -nargs=* Wrap set wrap linebreak nolist
