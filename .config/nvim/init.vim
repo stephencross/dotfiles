@@ -12,7 +12,6 @@ map <Leader>tv :TabVifm<CR>
 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'junegunn/limelight.vim'
-Plug 'inkarkat/vim-spellcheck'
 Plug 'vimwiki/vimwiki'
 call plug#end()
 
