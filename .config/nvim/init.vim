@@ -10,9 +10,9 @@ map <Leader>sp :SplitVifm<CR>
 map <Leader>dv :DiffVifm<CR>
 map <Leader>tv :TabVifm<CR>
 
-
-call plug#begin()
+call plug#begin('~/.config/nvim/plugged')
 Plug 'junegunn/limelight.vim'
+Plug 'inkarkat/vim-spellcheck'
 Plug 'vimwiki/vimwiki'
 call plug#end()
 
