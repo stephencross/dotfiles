@@ -576,3 +576,5 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 awful.util.spawn("nm-applet")
 -- Battery Indicator
 awful.util.spawn("cbatticon")
+-- Pulseadio System Tray
+awful.util.spawn("pasystray")
