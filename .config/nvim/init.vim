@@ -80,3 +80,12 @@ nnoremap <leader>h :wincmd h<CR>
 nnoremap <leader>j :wincmd j<CR>
 nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>l :wincmd l<CR>
+
+" Better tab experience - from https://webdevetc.com/
+     
+map <leader>tn :tabnew<cr>
+map <leader>t<leader> :tabnext
+map <leader>tm :tabmove
+map <leader>tc :tabclose<cr>
+map <leader>to :tabonly<cr> 
+
