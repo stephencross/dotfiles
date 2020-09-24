@@ -16,6 +16,8 @@ set incsearch
 set undodir=~/.vim/undodir
 set undofile
 
+let mapleader=" "
+
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 
@@ -69,6 +71,9 @@ let g:netrw_browse_split = 2
 let g:vrfr_rg = 'true'
 let g:netrw_banner = 0
 let g:netrw_winsize = 25
+
+" NERDTree
+let NERDTreeShowHidden=1
 
 nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <leader>h :wincmd h<CR>
