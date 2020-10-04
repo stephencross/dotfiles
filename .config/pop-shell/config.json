@@ -1,0 +1,13 @@
+{
+  "float": [
+    {
+      "class": "Gnome-control-center",
+      "title": ""
+    },
+    {
+      "class": "Gnome-calculator",
+      "title": ""
+    }
+  ],
+  "log_on_focus": false
+}
