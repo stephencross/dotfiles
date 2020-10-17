@@ -11,6 +11,10 @@
     {
       "class": "zoom",
       "title": ""
+    },
+    {
+      "class": "Org.gnome.Nautilus",
+      "title": ""
     }
   ],
   "log_on_focus": false
