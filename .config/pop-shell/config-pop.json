@@ -7,6 +7,10 @@
     {
       "class": "Gnome-calculator",
       "title": ""
+    },
+    {
+      "class": "zoom",
+      "title": ""
     }
   ],
   "log_on_focus": false
