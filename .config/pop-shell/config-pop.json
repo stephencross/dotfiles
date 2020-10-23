@@ -12,8 +12,12 @@
       "class": "zoom",
       "title": ""
     },
-    {
+     {
       "class": "Org.gnome.Nautilus",
+      "title": ""
+    },
+    {
+      "class": "copyq",
       "title": ""
     }
   ],
