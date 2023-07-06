@@ -8,10 +8,6 @@
 5. Clone
 `git clone --bare git@github.com:stephencross/dotfiles.git $HOME/dotfiles`
 6. Get files
-config checkout 
-
-# dotfiles
-
-To include .bashrc-sac in your .bachrc : 
-
+config checkout
+7. Add custom bash. Add .bashrc-sac in your .bachrc
 source /full/path/.bashrc-sac
