@@ -6,6 +6,10 @@
 # Copyright (c) 2013 horsik
 # Copyright (c) 2013 Tao Sauvage
 #
+<<<<<<< HEAD
+=======
+# TEST 
+>>>>>>> c04e89dbcb7c63f323980c4faca33e2f90ce90a9
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
@@ -24,8 +28,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from libqtile import bar, layout, widget
-from libqtile.config import Click, Drag, Group, Key, Match, Screen
+from libqtile import bar, layout, widget, extension
+from libqtile.config import Click, Drag, Group, Key, Match, Screen, ScratchPad, DropDown
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
@@ -54,6 +58,14 @@ keys = [
     Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
+    # Sound
+    Key([], "XF86AudioMute", lazy.spawn("amixer -q set Master toggle")),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -c 0 sset Master 1- unmute")),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -c 0 sset Master 1+ unmute")),
+ #   Key([mod], "t", lazy.group["sound"].dropdown_toggle('sound')),
+    # Rofi
+    Key([mod, "shift"], "r", lazy.spawn("rofi -show run")),
+
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
@@ -70,10 +82,11 @@ keys = [
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+    Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget")
 ]
 
 groups = [Group(i) for i in "123456789"]
+# groups.append(ScratchPad("sp1",[DropDown("sound", "alsamixer",x=0.12,y=0.02,width=.80,height=0.6,on_focus_lost_hide=False)]))
 
 for i in groups:
     keys.extend(
@@ -98,6 +111,9 @@ for i in groups:
             #     desc="move focused window to group {}".format(i.name)),
         ]
     )
+
+# groups.append(ScratchPad("sound",[DropDown("sound", "alsamixer",x=0.12,y=0.02,width=.80,height=0.6,on_focus_lost_hide=False)]))
+
 
 layouts = [
     layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
@@ -142,6 +158,7 @@ screens = [
                 # widget.StatusNotifier(),
                 widget.Systray(),
                 widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
+                widget.Volume(),
                 widget.QuickExit(),
             ],
             24,
