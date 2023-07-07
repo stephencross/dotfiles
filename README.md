@@ -11,3 +11,5 @@
 config checkout
 7. Add custom bash. Add .bashrc-sac in your .bachrc
 source /full/path/.bashrc-sac
+
+Reference: https://www.atlassian.com/git/tutorials/dotfiles
