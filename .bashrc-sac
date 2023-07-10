@@ -10,6 +10,9 @@ PS1='[\u@\h \W]\$ '
 
 alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 
+# Flatpak desktop path 
+XDG_DATA_DIRS=$XDG_DATA_DIRS:/home/stephencross/.local/share/flatpak/exports/share/applications
+
 # vim
 # alias vim='nvim'
 

@@ -6,10 +6,6 @@
 # Copyright (c) 2013 horsik
 # Copyright (c) 2013 Tao Sauvage
 #
-<<<<<<< HEAD
-=======
-# TEST 
->>>>>>> c04e89dbcb7c63f323980c4faca33e2f90ce90a9
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
@@ -32,6 +28,12 @@ from libqtile import bar, layout, widget, extension
 from libqtile.config import Click, Drag, Group, Key, Match, Screen, ScratchPad, DropDown
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
+from libqtile import hook
+
+@hook.subscribe.startup_once
+def autostart():
+    lazy.to_screen(0)
+    lazy.spawn("synology-drive")
 
 mod = "mod4"
 terminal = guess_terminal()
@@ -60,11 +62,11 @@ keys = [
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
     # Sound
     Key([], "XF86AudioMute", lazy.spawn("amixer -q set Master toggle")),
-    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -c 0 sset Master 1- unmute")),
-    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -c 0 sset Master 1+ unmute")),
- #   Key([mod], "t", lazy.group["sound"].dropdown_toggle('sound')),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer sset Master 1000- unmute")),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer sset Master 1000+ unmute")),
+    #   Key([mod], "t", lazy.group["sound"].dropdown_toggle('sound')),
     # Rofi
-    Key([mod, "shift"], "r", lazy.spawn("rofi -show run")),
+    Key([mod, "shift"], "r", lazy.spawn("rofi -show drun")),
 
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
@@ -82,12 +84,11 @@ keys = [
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget")
+    Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+    Key([mod,"shift"], "f", lazy.spawn('gnome-terminal -e "ranger"'))
 ]
 
 groups = [Group(i) for i in "123456789"]
-# groups.append(ScratchPad("sp1",[DropDown("sound", "alsamixer",x=0.12,y=0.02,width=.80,height=0.6,on_focus_lost_hide=False)]))
-
 for i in groups:
     keys.extend(
         [
@@ -112,8 +113,14 @@ for i in groups:
         ]
     )
 
-# groups.append(ScratchPad("sound",[DropDown("sound", "alsamixer",x=0.12,y=0.02,width=.80,height=0.6,on_focus_lost_hide=False)]))
+# Sound - Scratchpad
+groups.append(ScratchPad("scratchpad1", [
+                DropDown("sound", "pavucontrol",width=0.4,x=0.3,y=0.2),
+                      ]),
+          )
 
+keys.extend([Key([mod,"shift"], 's', 
+lazy.group['scratchpad1'].dropdown_toggle("sound")),])
 
 layouts = [
     layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
@@ -140,7 +147,9 @@ extension_defaults = widget_defaults.copy()
 
 screens = [
     Screen(
-        bottom=bar.Bar(
+        wallpaper = "~/wallpaper/van_gogh_1.jpg",
+        wallpaper_mode = "fill",
+        top=bar.Bar(
             [
                 widget.CurrentLayout(),
                 widget.GroupBox(),
@@ -152,13 +161,18 @@ screens = [
                     },
                     name_transform=lambda name: name.upper(),
                 ),
-                widget.TextBox("default config", name="default"),
-                widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
+                # widget.TextBox("default config", name="default"),
+                # widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 # widget.StatusNotifier(),
                 widget.Systray(),
-                widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
+                widget.Spacer(length=3),
+                widget.Clock(format="%m-%d %a"),
+                widget.Clock(format="%I:%M %p", background="32a852"),
+                widget.TextBox('V:'),
                 widget.Volume(),
+                widget.TextBox('B:'),
+                widget.Battery(format="{percent:2.0%}"),
                 widget.QuickExit(),
             ],
             24,
