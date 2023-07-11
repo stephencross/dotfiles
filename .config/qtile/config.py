@@ -85,7 +85,8 @@ keys = [
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
-    Key([mod,"shift"], "f", lazy.spawn('gnome-terminal -e "ranger"'))
+    Key([mod,"shift"], "f", lazy.spawn('gnome-terminal -e "ranger"')),
+    Key([mod,"shift"], "d", lazy.spawn('arandr'))
 ]
 
 groups = [Group(i) for i in "123456789"]
@@ -180,6 +181,39 @@ screens = [
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
         ),
     ),
+
+    Screen(
+        top=bar.Bar(
+            [
+                widget.CurrentLayout(),
+                widget.GroupBox(),
+                widget.Prompt(),
+                widget.WindowName(),
+                widget.Chord(
+                    chords_colors={
+                        "launch": ("#ff0000", "#ffffff"),
+                    },
+                    name_transform=lambda name: name.upper(),
+                ),
+                # widget.TextBox("default config", name="default"),
+                # widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
+                # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
+                # widget.StatusNotifier(),
+                widget.Spacer(length=3),
+                widget.Clock(format="%m-%d %a"),
+                widget.Clock(format="%I:%M %p", background="32a852"),
+                widget.TextBox('V:'),
+                widget.Volume(),
+                widget.TextBox('B:'),
+                widget.Battery(format="{percent:2.0%}"),
+                widget.QuickExit(),
+            ],
+            24,
+            # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
+            # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
+        ),
+    ),
+
 ]
 
 # Drag floating layouts.
