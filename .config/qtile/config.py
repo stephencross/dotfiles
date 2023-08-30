@@ -85,7 +85,8 @@ keys = [
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
-    Key([mod,"shift"], "f", lazy.spawn('gnome-terminal -e "ranger"')),
+    # Key([mod,"shift"], "f", lazy.spawn('gnome-terminal -e "ranger"')),
+    Key([mod,"shift"],"f",lazy.spawn('nautilus --browser')),
     Key([mod,"shift"], "d", lazy.spawn('arandr'))
 ]
 
