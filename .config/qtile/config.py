@@ -67,6 +67,9 @@ keys = [
     #   Key([mod], "t", lazy.group["sound"].dropdown_toggle('sound')),
     # Rofi
     Key([mod, "shift"], "r", lazy.spawn("rofi -show drun")),
+    # Wifi
+    Key([mod,"shift"], "w", lazy.spawn(terminal)),
+
 
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
@@ -203,6 +206,8 @@ screens = [
                 widget.Spacer(length=3),
                 widget.Clock(format="%m-%d %a"),
                 widget.Clock(format="%I:%M %p", background="32a852"),
+                widget.TextBox('N:'),
+                widget.Wlan(format='{essid} {percent:2.0%}', interface="wlo1"),
                 widget.TextBox('V:'),
                 widget.Volume(),
                 widget.TextBox('B:'),
